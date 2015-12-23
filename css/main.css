@@ -1,0 +1,63 @@
+* {
+
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: url(../img/body-background.jpg) 100% fixed;
+	background-size: cover;
+}
+
+section {
+
+}
+
+.layout-wrap {
+	width: 950px;
+	margin: 0 auto;
+	padding: 25px 10px 25px 10px;
+}
+
+header {
+	height: 74px;
+	width: 100%;
+	background: black;
+}
+
+.logo {
+	display: inline-block;
+	float: left;
+}
+
+.search-box {
+	float: right;
+}
+
+.page-body {
+	background: rgba(116, 116, 116, 0.6);
+}
+
+.notifications {
+
+}
+
+.menu {
+
+}
+
+.menu-caption {
+
+}
+
+.action-list {
+
+}
+
+.nav-section {
+
+}
+
+.tabs {
+
+}
