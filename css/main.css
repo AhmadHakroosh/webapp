@@ -35,7 +35,7 @@ header {
 }
 
 .page-body {
-	background: rgba(116, 116, 116, 0.6);
+	background: rgba(116, 116, 116, 0.4);
 }
 
 .notifications {
@@ -150,6 +150,26 @@ header {
 
 .tabs-headers {
 	list-style-type: none;
+	padding: 0;
+}
+
+.tab-item {
+	float: left;
+	background: rgb(100, 100, 100);
+	width: 224px;
+	height: 30px;
+	margin: -5px 18px 0 0;
+	padding-top: 10px;
+	text-align: center;
+}
+
+.tab-item:last-child {
+	margin: -5px 0 0 0;
+}
+
+.tab-item a:link {
+	text-decoration: none;
+	color: white;
 }
 
 .frame-area {
@@ -157,15 +177,15 @@ header {
 }
 
 .links-list {
-	float: left;
+	
 }
 
 .settings-icon {
 	float: right;
-	background: url(../img/icons/settings.png)
+	background: url(../img/icons/settings.png);
 }
 
 .expand-icon {
 	float: right;
-	background: url(../img/icons/expand.png)
+	background: url(../img/icons/expand.png);
 }

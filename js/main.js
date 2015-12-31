@@ -20,20 +20,17 @@ var dropdowns = {
 	}
 }
 
-function notify () {
-	/**
-	* Retrieve notification text from data JSON file
-	*/
+/*function notify () {
 	var request = new XMLHttpRequest();
 	request.open("GET", "./data/config.json");
 	request.send();
 
 	request.onsreadytatechange = function () {
 		if (request.readyState == 4 && request.status == 200) {
-			$(".notifications").innerHTML = request.responseText;
+			$(".notifications").innerHTML = request.responseText.;
 		};
 	}
 }
 
 notify();
-console.log("hello");
+console.log("hello");*/
