@@ -18,4 +18,22 @@ var dropdowns = {
 	openDropdown : function () {
 
 	}
-};
+}
+
+function notify () {
+	/**
+	* Retrieve notification text from data JSON file
+	*/
+	var request = new XMLHttpRequest();
+	request.open("GET", "./data/config.json");
+	request.send();
+
+	request.onsreadytatechange = function () {
+		if (request.readyState == 4 && request.status == 200) {
+			$(".notifications").innerHTML = request.responseText;
+		};
+	}
+}
+
+notify();
+console.log("hello");
