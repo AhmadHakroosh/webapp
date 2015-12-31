@@ -1,5 +1,5 @@
 * {
-
+	font-family: sans-serif;
 }
 
 body {
@@ -43,21 +43,129 @@ header {
 }
 
 .menu {
+	
+}
 
+.menu:hover .action-list {
+	display: block;
 }
 
 .menu-caption {
+	display: inline-block;
+	text-align: left;
+	padding: 5px 10px 5px;
+	background: rgba(235, 235, 235, 1);
+	position: relative;
+	width: 284px;
+}
 
+.menu-caption:hover {
+	background: rgba(235, 235, 235, 0.9);
+}
+
+.menu-caption:hover~.action-list {
+	display: block;
+}
+
+.menu-caption::after {
+	content: url(../img/icons/arrow.png);
+	float: right;
+	margin: -20px 0;
+    -moz-transition:0.5s all;
+    -webkit-transition:0.5s all;
+}
+
+.menu-caption:hover::after {
+	transform: rotate(180deg);
+}
+
+.menu-caption p {
+	margin: 0 !important;
+	color: rgb(84, 84, 84);
 }
 
 .action-list {
+	margin: 1px 0 0 0;
+	padding: 0 20px 0 20px;
+	list-style: none;
+	text-align: left;
+	display: none;
+	position: absolute;
+	box-shadow: 1px 0 3px 0 grey;
+	width: 264px;
+	background: white;
+}
 
+.action-list-item {
+	padding: 10px 0 10px 0;
+	margin: 0;
+	border-bottom: 1px solid rgb(235, 235, 235);
+}
+
+.action-list-item a:link {
+	text-decoration: none;
+	color: rgb(79, 79, 79);
+}
+
+.action-list-item:hover {
+	background: rgb(238, 238, 238);
+}
+
+.action-list-item:last-child {
+	border: none;
 }
 
 .nav-section {
+	width: 304px;
+	height: 140px;
+	display: inline-block;
+	margin-right: 1.5%;
+	color: white;
+	text-align: center;
+}
 
+.nav-section:last-child {
+	margin-right: 0;
+}
+
+.nav-section p {
+	margin: 5px 0 71px 0;
+}
+
+.new-report {
+	background: black url(../img/icons/action-report-new.png) center top 60px no-repeat
+}
+
+.top-report {
+	background: black url(../img/icons/action-report-top.png) center top 60px no-repeat
+}
+
+.help {
+	background: black url(../img/icons/actions-help.png) center top 60px no-repeat
 }
 
 .tabs {
+	
+}
 
+.tabs-headers {
+	list-style-type: none;
+}
+
+.frame-area {
+
+}
+
+.links-list {
+	float: left;
+}
+
+.settings-icon {
+	float: right;
+	background: url(../img/icons/settings.png)
+}
+
+.expand-icon {
+	float: right;
+	background: url(../img/icons/expand.png)
 }
