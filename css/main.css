@@ -16,7 +16,7 @@ section {
 .layout-wrap {
 	width: 950px;
 	margin: 0 auto;
-	padding: 25px 10px 25px 10px;
+	padding: 25px 10px 0 10px;
 }
 
 header {
@@ -32,6 +32,11 @@ header {
 
 .search-box {
 	float: right;
+	margin: 3px 0 0 0;
+}
+
+.search-box input {
+	height: 25px;
 }
 
 .page-body {
@@ -85,24 +90,25 @@ header {
 }
 
 .action-list {
-	margin: 1px 0 0 0;
+	margin: 0;
 	padding: 0 20px 0 20px;
 	list-style: none;
 	text-align: left;
 	display: none;
 	position: absolute;
-	box-shadow: 1px 0 3px 0 grey;
 	width: 264px;
 	background: white;
+	transition: height 2s;
+	-webkit-transition: height2s;
 }
 
 .action-list-item {
 	padding: 10px 0 10px 0;
 	margin: 0;
-	border-bottom: 1px solid rgb(235, 235, 235);
+	border-bottom: 1px solid lightgrey;
 }
 
-.action-list-item a:link {
+.action-list-item a:link, .action-list-item a:visited {
 	text-decoration: none;
 	color: rgb(79, 79, 79);
 }
@@ -132,15 +138,15 @@ header {
 	margin: 5px 0 71px 0;
 }
 
-.new-report {
+.reports {
 	background: black url(../img/icons/action-report-new.png) center top 60px no-repeat
 }
 
-.top-report {
+.dashboards {
 	background: black url(../img/icons/action-report-top.png) center top 60px no-repeat
 }
 
-.help {
+.guides {
 	background: black url(../img/icons/actions-help.png) center top 60px no-repeat
 }
 
@@ -163,29 +169,69 @@ header {
 	text-align: center;
 }
 
-.tab-item:last-child {
+.tab-item:last-child, .active-tab-item:last-child {
 	margin: -5px 0 0 0;
 }
 
-.tab-item a:link {
+.tab-item a:link, .tab-item a:visited {
 	text-decoration: none;
 	color: white;
 }
 
-.frame-area {
+.active-tab-item {
+	float: left;
+	background: rgb(235, 235, 235);
+	width: 224px;
+	height: 30px;
+	margin: -5px 18px 0 0;
+	padding-top: 10px;
+	text-align: center;
+}
 
+.active-tab-item a:link, .active-tab-item a:visited {
+	text-decoration: none;
+	color: rgb(51, 51, 51);
+}
+
+.frame-area {
+	margin: 51px 0 0 0;
+	padding: 10px 10px 0 10px;
+	background: rgb(235, 235, 235);
 }
 
 .links-list {
-	
+	width: 200px;
+	height: 30px;
+	border: none;
 }
 
-.settings-icon {
+#settings-icon {
+	display: none;
+}
+
+#settings-icon:checked ~ #settings {
+	background: white;
+}
+
+#settings {
 	float: right;
-	background: url(../img/icons/settings.png);
+	padding: 5px 5px 0 5px;
+	text-align: center;
 }
 
 .expand-icon {
 	float: right;
-	background: url(../img/icons/expand.png);
+	margin: 5px 5px 0 0;
+	background: url(../img/icons/expand.png) no-repeat center center;
+	display: block;
+	width: 20px;
+	height: 20px;
+}
+
+.frame-window {
+	width: 100%;
+	height: 296px;
+	margin: 10px 0 0 0;
+	border: none;
+	background: white;
 }

@@ -24,7 +24,7 @@
 		<div class="notifications"></div>
 
 		<nav>
-			<div class="nav-section new-report">
+			<div class="nav-section reports">
 				<p>Select<br> Reporting Platform</p>
 
 				<div class="menu">
@@ -32,17 +32,11 @@
 						<p>Choose QS report</p>
 					</div>
 
-					<ul class="action-list">
-						<li class="action-list-item"><a href="#">link</a></li>
-						<li class="action-list-item"><a href="#">link</a></li>
-						<li class="action-list-item"><a href="#">link</a></li>
-						<li class="action-list-item"><a href="#">link</a></li>
-						<li class="action-list-item"><a href="#">link</a></li>
-					</ul>
+					<ul class="action-list"></ul>
 				</div>
 			</div>
 
-			<div class="nav-section top-report">
+			<div class="nav-section dashboards">
 				<p>Select<br> Dashboard</p>
 
 				<div class="menu">
@@ -50,17 +44,11 @@
 						<p>Choose dashboard</p>
 					</div>
 
-					<ul class="action-list">
-						<li class="action-list-item"><a href="#">link</a></li>
-						<li class="action-list-item"><a href="#">link</a></li>
-						<li class="action-list-item"><a href="#">link</a></li>
-						<li class="action-list-item"><a href="#">link</a></li>
-						<li class="action-list-item"><a href="#">link</a></li>
-					</ul>
+					<ul class="action-list"></ul>
 				</div>
 			</div>
 
-			<div class="nav-section help">
+			<div class="nav-section guides">
 				<p>Help &amp;<br> Tutorials</p>
 
 				<div class="menu">
@@ -68,13 +56,7 @@
 						<p>Choose guide</p>
 					</div>
 
-					<ul class="action-list">
-						<li class="action-list-item"><a href="#">link</a></li>
-						<li class="action-list-item"><a href="#">link</a></li>
-						<li class="action-list-item"><a href="#">link</a></li>
-						<li class="action-list-item"><a href="#">link</a></li>
-						<li class="action-list-item"><a href="#">link</a></li>
-					</ul>
+					<ul class="action-list"></ul>
 				</div>
 			</div>
 		</nav>
@@ -103,7 +85,11 @@
 		<section class="frame-area">
 			<div class="frame-header">
 				<select class="links-list"></select>
-				<input type="checkbox" class="settings-icon">
+				<label id="settings" for="settings-icon">
+					<img src="img/icons/settings.png">
+				</label>
+				<input type="checkbox" id="settings-icon">
+
 				<a href="" class="expand-icon"></a>
 			</div>
 			<iframe src="" class="frame-window"></iframe>
