@@ -5,9 +5,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>WebApp</title>
+	<title>webapp</title>
 
 	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="fonts/style.css">
 </head>
 <body>
 	<header>
@@ -63,26 +64,30 @@
 
 		<section class="tabs">
 			<ul class="tabs-headers">
-				<li class="tab-item"><a href="#quick-reports">Quick Reports</a></li>
-				<li class="tab-item"><a href="#my-folders">My Folders</a></li>
-				<li class="tab-item"><a href="#my-team-folders">My Team Folders</a></li>
-				<li class="tab-item"><a href="#public-folders">Public Folders</a></li>
+				<li class="tab-item"><a href="#quick-reports"><i class="icon-external-link"></i> Quick Reports</a></li>
+				<li class="tab-item"><a href="#my-folders"><i class="icon-star-o"></i> My Folders</a></li>
+				<li class="tab-item"><a href="#my-team-folders"><i class="icon-folder-open-o"></i> My Team Folders</a></li>
+				<li class="tab-item"><a href="#public-folders"><i class="icon-copy"></i> Public Folders</a></li>
 			</ul>
 
 			<div id="quick-reports">
-				<ul></ul>
+				<ul class="links"></ul>
 			</div>
 
 			<div id="my-folders">
-				<ul></ul>
+				<ul class="links">
+					<li>http://www.ahmad-h.com</li>
+					<li>http://www.ahmad-h.com</li>
+					<li>http://www.ahmad-h.com</li>
+				</ul>
 			</div>
 
 			<div id="my-team-folders">
-				<ul></ul>
+				<ul class="links"></ul>
 			</div>
 
 			<div id="public-folders">
-				<ul></ul>
+				<ul class="links"></ul>
 			</div>
 		</section>
 
@@ -94,7 +99,7 @@
 				</label>
 				<input type="checkbox" id="settings-icon">
 
-				<form class="settings-form" method="GET">
+				<form class="settings-form" method="POST">
 
 					<div class="row">
 						<label for="name1">Name:</label><input id="name1" class="" type="text">

@@ -61,7 +61,10 @@ function tabbing () {
 }
 
 function activateTab (tabName) {
-	
+	var linksSelector = "#" + tabName + " .links li";
+	var linksList = all(linksSelector);
+	console.log("hello");
 }
 
 window.onLoad = initialize();
+activateTab("my-folders");
