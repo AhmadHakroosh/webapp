@@ -42,7 +42,6 @@ function initialize () {
 	setLinks("guides", guides);
 
 	tabbing();
-	$(".tab-item").className = "active-tab-item";
 
 	console.log("hello");
 }
@@ -56,9 +55,13 @@ function tabbing () {
 		tabs[i].addEventListener("click", function (e) {
 			$(".active-tab-item").className = "tab-item";
 			this.parentNode.className = "active-tab-item";
-			console.log("hello");
 		});
 	}
+	$(".tab-item").className = "active-tab-item";
+}
+
+function activateTab (tabName) {
+	
 }
 
 window.onLoad = initialize();

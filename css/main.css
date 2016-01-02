@@ -150,6 +150,10 @@ header {
 	background: black url(../img/icons/actions-help.png) center top 60px no-repeat
 }
 
+#quick-reports, #my-folders, #my-team-folders, #public-folders {
+	display: none;
+}
+
 .tabs {
 	
 }
@@ -209,10 +213,6 @@ header {
 	display: none;
 }
 
-#settings-icon:checked ~ #settings {
-	background: white;
-}
-
 #settings {
 	float: right;
 	padding: 5px 5px 0 5px;
@@ -226,6 +226,57 @@ header {
 	display: block;
 	width: 20px;
 	height: 20px;
+}
+
+.settings-form {
+	display: none;
+	position: absolute;
+	width: 930px;
+	margin: 4px 0 0 0;
+	box-shadow: 3px 3px 3px 0 grey;
+	background: white;
+}
+
+.settings-form .row {
+	margin: 10px;
+	background: rgb(218, 218, 218);
+	line-height: 30px;
+	padding: 5px;
+}
+
+.row input {
+	height: 20px;
+	width: 400px;
+	vertical-align: middle;
+}
+
+#form-save {
+	background: black;
+	color: white;
+	width: 80px;
+	height: 25px;
+	margin: 10px;
+	float: right;
+	border: none;
+}
+
+#form-cancel {
+	background: white;
+	color: black;
+	text-decoration: underline;
+	width: 80px;
+	height: 25px;
+	margin: 10px;
+	float: right;
+	border: none;
+}
+
+#settings-icon:checked~.settings-form {
+	display: block;
+}
+
+#settings-icon:checked~#settings {
+	background: white;
 }
 
 .frame-window {
