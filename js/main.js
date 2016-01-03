@@ -7,23 +7,6 @@ function all (selector) {
 	return document.querySelectorAll(selector);
 }
 
-var reports = [
-	{name : "Corporate", url : ""},
-	{name : "Simple", url : ""},
-	{name : "Business", url : ""}
-];
-
-var dashboards = [
-	{name : "Google", url : "https://www.google.com"},
-	{name : "Yahoo", url : "https://www.yahoo.com"},
-	{name : "Microsoft", url : "https://www.microsoft.com"}
-];
-
-var guides = [
-	{name : "Stack Overflow", url : "https://www.stackoverflow.com"},
-	{name : "W3Schools", url : "https://www.w3schools.com"}
-];
-
 //initialize the application view
 function initialize () {
 	requestData();
@@ -43,21 +26,20 @@ function tabbing () {
 			$(".active-tab-item").className = "tab-item";
 			this.parentNode.className = "active-tab-item";
 
+			//hide settings icon and links lists for My Folders tab
 			if (this.hash == "#my-folders") {
 				$("#settings").style.display = "none";
 				$(".links-list").style.display = "none";
+			//unhide for other tabs
 			} else {
 				$("#settings").style.display = "block";
 				$(".links-list").style.display = "inline-block";
-			};
+			}
+
+
 		});
 	}
 	$(".tab-item").className = "active-tab-item";
-}
-
-function activateTab (tabName) {
-	var linksSelector = "#" + tabName + " .links li";
-	var linksList = all(linksSelector);
 }
 
 function requestData () {
@@ -89,19 +71,55 @@ function requestData () {
 					actionLists[i].innerHTML += "<li class=\"action-list-item\"><a href=\"" + actions[j].url + "\">" + actions[j].label + "</a></li>"
 				}
 			}
-
-			var tabs = all(".tab-item a");
+			//initialize tabs data
+			var tabs = all(".tab-link");
 			var tabsList = data.tabsList;
 			for (var i = 0; i < tabs.length; i++) {
 				tabs[i].innerHTML = "<i class=\"" + tabsList[i].icon + "\"></i> " + tabsList[i].label;
 			}
 		}
-	}
+	};
 }
 
 function saveData () {
 
 }
 
+function setLinksList (tabName) {
+	var request = new XMLHttpRequest();
+	request.open("GET", "http://ahmadhakroosh.github.io/webapp/data/config.json", true);
+	request.send();
+
+	request.onreadystatechange = function () {
+		if (request.readyState == 4 && request.status == 200) {
+			var data = JSON.parse(request.responseText);
+
+			var links = data.tabsList
+		}
+	};
+}
+
+function findTab (tabName) {
+	var request = new XMLHttpRequest();
+	request.open("GET", "http://ahmadhakroosh.github.io/webapp/data/config.json", true);
+	request.send();
+
+	request.onreadystatechange = function () {
+		if (request.readyState == 4 && request.status == 200) {
+			var data = JSON.parse(request.responseText);
+			var tabs = data.tabsList;
+
+			for (var i = 0; i < tabs.length; i++) {
+				if (tabs[i].label == tabName) {
+					var tab = {
+						label : tabs[i].label,
+						links : tabs[i].links
+					};
+					return tab;
+				}
+			};
+		}
+	};
+}
+
 window.onLoad = initialize();
-activateTab("my-folders");
