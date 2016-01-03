@@ -44,7 +44,10 @@ header {
 }
 
 .notifications {
-
+	background: rgb(235, 235, 235);
+	padding: 5px;
+	margin: -15px 1px 10px 0;
+	font-size: 0.8em;
 }
 
 .menu {
@@ -99,7 +102,7 @@ header {
 	width: 264px;
 	background: white;
 	transition: height 2s;
-	-webkit-transition: height2s;
+	-webkit-transition: height 2s;
 }
 
 .action-list-item {
@@ -136,18 +139,6 @@ header {
 
 .nav-section p {
 	margin: 5px 0 71px 0;
-}
-
-.reports {
-	background: black url(../img/icons/action-report-new.png) center top 60px no-repeat
-}
-
-.dashboards {
-	background: black url(../img/icons/action-report-top.png) center top 60px no-repeat
-}
-
-.guides {
-	background: black url(../img/icons/actions-help.png) center top 60px no-repeat
 }
 
 #quick-reports, #my-folders, #my-team-folders, #public-folders {
@@ -221,7 +212,7 @@ header {
 
 .expand-icon {
 	float: right;
-	margin: 5px 5px 0 0;
+	margin: 5px 5px 8px 0;
 	background: url(../img/icons/expand.png) no-repeat center center;
 	display: block;
 	width: 20px;
@@ -233,7 +224,7 @@ header {
 	position: absolute;
 	width: 930px;
 	margin: 4px 0 0 0;
-	box-shadow: 3px 3px 3px 0 grey;
+	box-shadow: 5px 5px 5px 0 lightgrey;
 	background: white;
 }
 
@@ -281,7 +272,7 @@ header {
 
 .frame-window {
 	width: 100%;
-	height: 296px;
+	height: 560px;
 	margin: 10px 0 0 0;
 	border: none;
 	background: white;

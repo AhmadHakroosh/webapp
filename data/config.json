@@ -56,21 +56,51 @@
 	],
 	"tabsList": [
 		{
-			"options": {
-				"rowLabel": "Report"
-			}
-		}, {
-			"options": {
-				"url": "http://www.paulirish.com/"
-			}
-		}, {
-			"options": {
-				"rowLabel": "Folder"
-			}
-		}, {
-			"options": {
-				"url": "http://addyosmani.com/"
-			}
+			"icon" : "icon-external-link",
+			"label" : "Quick Reports",
+			"links" : 
+			[
+				{
+					"label" : "Paul Irish",
+					"url" : "http://www.paulirish.com/"
+				}
+			]
+		},
+
+		{
+			"icon" : "icon-star-o",
+			"label" : "My Folders",
+			"links" : 
+			[
+				{
+					"label" : "Paul Irish",
+					"url" : "http://www.paulirish.com/"
+				}
+			]
+		},
+
+		{
+			"icon" : "icon-folder-open-o",
+			"label" : "My Team Folders",
+			"links" : 
+			[
+				{
+					"label" : "Paul Irish",
+					"url" : "http://www.paulirish.com/"
+				}
+			]
+		},
+
+		{
+			"icon" : "icon-copy",
+			"label" : "Public Folders",
+			"links" : 
+			[
+				{
+					"label" : "Paul Irish",
+					"url" : "http://www.paulirish.com/"
+				}
+			]
 		}
 	]
 }

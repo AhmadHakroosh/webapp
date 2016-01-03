@@ -24,22 +24,9 @@ var guides = [
 	{name : "W3Schools", url : "https://www.w3schools.com"}
 ];
 
-//set the links of each menu
-function setLinks (linksHeader, linksList) {
-	var listSelector = "." + linksHeader + " .menu .action-list";
-	var link = "";
-	for (var i = 0; i < linksList.length; i++) {
-		link = "<li class=\"action-list-item\"><a href=\"" + linksList[i].url + "\">" + linksList[i].name + "</a></li>";
-		$(listSelector).innerHTML += link;
-	};
-}
-
 //initialize the application view
 function initialize () {
-	//set links of each menu
-	setLinks("reports", reports);
-	setLinks("dashboards", dashboards);
-	setLinks("guides", guides);
+	requestData();
 
 	tabbing();
 
@@ -55,6 +42,14 @@ function tabbing () {
 		tabs[i].addEventListener("click", function (e) {
 			$(".active-tab-item").className = "tab-item";
 			this.parentNode.className = "active-tab-item";
+
+			if (this.hash == "#my-folders") {
+				$("#settings").style.display = "none";
+				$(".links-list").style.display = "none";
+			} else {
+				$("#settings").style.display = "block";
+				$(".links-list").style.display = "inline-block";
+			};
 		});
 	}
 	$(".tab-item").className = "active-tab-item";
@@ -63,7 +58,49 @@ function tabbing () {
 function activateTab (tabName) {
 	var linksSelector = "#" + tabName + " .links li";
 	var linksList = all(linksSelector);
-	console.log("hello");
+}
+
+function requestData () {
+	var request = new XMLHttpRequest();
+	request.open("GET", "http://ahmadhakroosh.github.io/webapp/data/config.json", true);
+	request.send();
+
+	request.onreadystatechange = function () {
+		if (request.readyState == 4 && request.status == 200) {
+			var data = JSON.parse(request.responseText);
+			$(".notifications").innerHTML = data.notification;
+
+			//set nav-sections titles
+			var navSections = all(".nav-section");
+			for (var i = 0; i < navSections.length; i++) {
+				navSections[i].innerHTML = "<p>" + data.quickActions[i].label + "</p>" + navSections[i].innerHTML;
+				navSections[i].style.background = "black url(./img/icons/" + data.quickActions[i].icon + ".png) center top 60px no-repeat";
+			}
+			//set menu-caption titles
+			var menuCaptions = all(".menu-caption");
+			for (var i = 0; i < menuCaptions.length; i++) {
+				menuCaptions[i].innerHTML = "<p>" + data.quickActions[i].actionsLabel + "</p>";
+			}
+			//set links for quick actions menus
+			var actionLists = all(".action-list");
+			for (var i = 0; i < actionLists.length; i++) {
+				actions = data.quickActions[i].actions;
+				for (var j = 0; j < actions.length; j++) {
+					actionLists[i].innerHTML += "<li class=\"action-list-item\"><a href=\"" + actions[j].url + "\">" + actions[j].label + "</a></li>"
+				}
+			}
+
+			var tabs = all(".tab-item a");
+			var tabsList = data.tabsList;
+			for (var i = 0; i < tabs.length; i++) {
+				tabs[i].innerHTML = "<i class=\"" + tabsList[i].icon + "\"></i> " + tabsList[i].label;
+			}
+		}
+	}
+}
+
+function saveData () {
+
 }
 
 window.onLoad = initialize();
