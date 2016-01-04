@@ -58,6 +58,7 @@
 		{
 			"icon" : "icon-external-link",
 			"label" : "Quick Reports",
+			"hash" : "#quick-reports",
 			"links" : 
 			[
 				{
@@ -70,6 +71,7 @@
 		{
 			"icon" : "icon-star-o",
 			"label" : "My Folders",
+			"hash" : "#my-folders",
 			"links" : 
 			[
 				{
@@ -82,6 +84,7 @@
 		{
 			"icon" : "icon-folder-open-o",
 			"label" : "My Team Folders",
+			"hash" : "#my-team-folders",
 			"links" : 
 			[
 				{
@@ -94,6 +97,7 @@
 		{
 			"icon" : "icon-copy",
 			"label" : "Public Folders",
+			"hash" : "#public-folders",
 			"links" : 
 			[
 				{

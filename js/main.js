@@ -77,6 +77,11 @@ function requestData () {
 			for (var i = 0; i < tabs.length; i++) {
 				tabs[i].innerHTML = "<i class=\"" + tabsList[i].icon + "\"></i> " + tabsList[i].label;
 			}
+
+			var linksList = $(".links-list");
+			var activeTab = $(".active-tab-item a");
+			var tab = findTab(activeTab, data.tabsList);
+			console.log("hello");
 		}
 	};
 }
@@ -85,41 +90,12 @@ function saveData () {
 
 }
 
-function setLinksList (tabName) {
-	var request = new XMLHttpRequest();
-	request.open("GET", "http://ahmadhakroosh.github.io/webapp/data/config.json", true);
-	request.send();
-
-	request.onreadystatechange = function () {
-		if (request.readyState == 4 && request.status == 200) {
-			var data = JSON.parse(request.responseText);
-
-			var links = data.tabsList
+function findTab (tab, tabsList) {
+	for (var i = 0; i < tabsList.length; i++) {
+		if (tabsList[i].hash == tab.hash) {
+			return tabsList[i];
 		}
-	};
-}
-
-function findTab (tabName) {
-	var request = new XMLHttpRequest();
-	request.open("GET", "http://ahmadhakroosh.github.io/webapp/data/config.json", true);
-	request.send();
-
-	request.onreadystatechange = function () {
-		if (request.readyState == 4 && request.status == 200) {
-			var data = JSON.parse(request.responseText);
-			var tabs = data.tabsList;
-
-			for (var i = 0; i < tabs.length; i++) {
-				if (tabs[i].label == tabName) {
-					var tab = {
-						label : tabs[i].label,
-						links : tabs[i].links
-					};
-					return tab;
-				}
-			};
-		}
-	};
+	}
 }
 
 window.onLoad = initialize();
