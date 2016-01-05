@@ -83,7 +83,7 @@ header {
     -webkit-transition:0.5s all;
 }
 
-.menu-caption:hover::after {
+.menu:hover .menu-caption::after {
 	transform: rotate(180deg);
 }
 
@@ -114,10 +114,6 @@ header {
 .action-list-item a:link, .action-list-item a:visited {
 	text-decoration: none;
 	color: rgb(79, 79, 79);
-}
-
-.action-list-item:hover {
-	/*background: rgb(238, 238, 238);*/
 }
 
 .action-list-item:last-child {
@@ -198,6 +194,28 @@ header {
 	width: 200px;
 	height: 30px;
 	border: none;
+	background: white;
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.links-list::after {
+	content: url(../img/icons/arrow.png);
+	float: right;
+	margin: 5px;
+}
+
+.link-item {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 6px 0 6px 8px;
+}
+
+.link-item a:link, .link-item a:visited {
+	text-decoration: none;
+	color: rgb(110, 110, 110);
 }
 
 #settings-icon {

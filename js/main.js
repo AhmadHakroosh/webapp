@@ -9,13 +9,14 @@ function all (selector) {
 
 //initialize the application view
 function initialize () {
+	//get the data from the server
 	requestData();
-
+	//activate tabbing functionality
 	tabbing();
-
+	//set links list
 	setLinksList();
-
-	console.log("hello");
+	//set frame link
+	setFrameLink();
 }
 
 //activate selected tab, deactivate others
@@ -27,7 +28,8 @@ function tabbing () {
 		tabs[i].addEventListener("click", function (e) {
 			$(".active-tab-item").className = "tab-item";
 			this.parentNode.className = "active-tab-item";
-
+			setLinksList();
+			setFrameLink();
 			//hide settings icon and links lists for My Folders tab
 			if (this.hash == "#my-folders") {
 				$("#settings").style.display = "none";
@@ -37,13 +39,10 @@ function tabbing () {
 				$("#settings").style.display = "block";
 				$(".links-list").style.display = "inline-block";
 			}
-
-			setLinksList();
 		});
 	}
 
 	$(".tab-item").className = "active-tab-item";
-	setLinksList();
 }
 
 function requestData () {
@@ -84,10 +83,11 @@ function requestData () {
 			}
 
 			//set tabs links
+			var links;
 			for (var i = 0; i < data.tabsList.length; i++) {
-				var links = data.tabsList[i].links;
+				links = data.tabsList[i].links;
 				for (var j = 0; j < links.length; j++) {
-					$(data.tabsList[i].hash + " .links").innerHTML += "<option><a href=\"" + links[j].url + "\">" + links[j].label + "</a></option>";
+					$(data.tabsList[i].hash + " .links").innerHTML += "<li class=\"link-item\"><a href=\"" + links[j].url + "\">" + links[j].label + "</a></li>";
 				}
 			}
 		}
@@ -98,26 +98,18 @@ function saveData () {
 
 }
 
-function setTabLinks (tab, linksList) {
-	tab += " .links";
-	$(tab).innerHTML = "";
-
-	for (var i = 0; i < linksList.length; i++) {
-		$(tab).innerHTML += "<option><a href=\"" + linksList[i].url + "\">" + linksList[i].label + "</a></option>";
-	}
-}
-
 function setLinksList () {
 	var activeTab = $(".active-tab-item .tab-link").hash;
 	$(".links-list").innerHTML = $(activeTab + " .links").innerHTML;
 }
 
-function findTab (tab, tabsList) {
-	for (var i = 0; i < tabsList.length; i++) {
-		if (tabsList[i].hash == tab.hash) {
-			return tabsList[i];
-		}
-	}
+function setFrameLink () {
+	$(".frame-window").src = $(".links-list .link-item a").href;
+	setExpandLink();
+}
+
+function setExpandLink () {
+	$(".expand-icon").href = $(".frame-window").src;
 }
 
 window.onLoad = initialize();
