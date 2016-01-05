@@ -13,13 +13,15 @@ function initialize () {
 
 	tabbing();
 
+	setLinksList();
+
 	console.log("hello");
 }
 
 //activate selected tab, deactivate others
 function tabbing () {
 	//add an event listener for each tab
-	var tabs = all(".tab-item a");
+	var tabs = all(".tab-link");
 
 	for (var i = 0; i < tabs.length; i++) {
 		tabs[i].addEventListener("click", function (e) {
@@ -36,10 +38,12 @@ function tabbing () {
 				$(".links-list").style.display = "inline-block";
 			}
 
-
+			setLinksList();
 		});
 	}
+
 	$(".tab-item").className = "active-tab-item";
+	setLinksList();
 }
 
 function requestData () {
@@ -50,6 +54,7 @@ function requestData () {
 	request.onreadystatechange = function () {
 		if (request.readyState == 4 && request.status == 200) {
 			var data = JSON.parse(request.responseText);
+			
 			$(".notifications").innerHTML = data.notification;
 
 			//set nav-sections titles
@@ -78,16 +83,33 @@ function requestData () {
 				tabs[i].innerHTML = "<i class=\"" + tabsList[i].icon + "\"></i> " + tabsList[i].label;
 			}
 
-			var linksList = $(".links-list");
-			var activeTab = $(".active-tab-item a");
-			var tab = findTab(activeTab, data.tabsList);
-			console.log("hello");
+			//set tabs links
+			for (var i = 0; i < data.tabsList.length; i++) {
+				var links = data.tabsList[i].links;
+				for (var j = 0; j < links.length; j++) {
+					$(data.tabsList[i].hash + " .links").innerHTML += "<option><a href=\"" + links[j].url + "\">" + links[j].label + "</a></option>";
+				}
+			}
 		}
 	};
 }
 
 function saveData () {
 
+}
+
+function setTabLinks (tab, linksList) {
+	tab += " .links";
+	$(tab).innerHTML = "";
+
+	for (var i = 0; i < linksList.length; i++) {
+		$(tab).innerHTML += "<option><a href=\"" + linksList[i].url + "\">" + linksList[i].label + "</a></option>";
+	}
+}
+
+function setLinksList () {
+	var activeTab = $(".active-tab-item .tab-link").hash;
+	$(".links-list").innerHTML = $(activeTab + " .links").innerHTML;
 }
 
 function findTab (tab, tabsList) {
