@@ -50,10 +50,6 @@ header {
 	font-size: 0.8em;
 }
 
-.menu {
-	
-}
-
 .menu:hover .action-list {
 	display: block;
 }
@@ -69,10 +65,6 @@ header {
 
 .menu-caption:hover {
 	background: rgba(235, 235, 235, 0.9);
-}
-
-.menu-caption:hover~.action-list {
-	display: block;
 }
 
 .menu-caption::after {
@@ -191,26 +183,58 @@ header {
 }
 
 .links-list {
-	width: 200px;
-	height: 30px;
-	border: none;
-	background: white;
 	display: inline-block;
-	margin: 0;
-	padding: 0;
-	list-style: none;
 }
 
-.links-list::after {
+.links-list:hover .links-action-list {
+	display: block;
+}
+
+.active-link {
+	width: 190px;
+	height: 30px;
+	padding: 0 0 0 10px;
+	background: white;
+	display: inline-block;
+}
+
+.active-link a {
+	line-height: 30px;
+}
+
+.active-link a:link, .active-link a:visited {
+	text-decoration: none;
+	color: rgb(110, 110, 110);
+}
+
+.active-link::after {
 	content: url(../img/icons/arrow.png);
 	float: right;
-	margin: 5px;
+	padding: 5px;
+}
+
+.links-action-list {
+	margin: 0;
+	padding: 5px;
+	list-style: none;
+	text-align: left;
+	display: none;
+	position: absolute;
+	width: 190px;
+	background: white;
+	transition: height 2s;
+	-webkit-transition: height 2s;
 }
 
 .link-item {
-	display: inline-block;
-	vertical-align: middle;
-	padding: 6px 0 6px 8px;
+	background: white;
+	border-bottom: 1px solid lightgrey;
+	padding: 5px;
+}
+
+.link-item:last-child {
+	border: none;
+	padding: 5px 5px 0 5px;
 }
 
 .link-item a:link, .link-item a:visited {

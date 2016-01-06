@@ -100,7 +100,8 @@ function saveData () {
 
 function setLinksList () {
 	var activeTab = $(".active-tab-item .tab-link").hash;
-	$(".links-list").innerHTML = $(activeTab + " .links").innerHTML;
+	$(".links-action-list").innerHTML = $(activeTab + " .links").innerHTML;
+	$(".active-link").innerHTML = $(activeTab + " .links .link-item").innerHTML;
 }
 
 function setFrameLink () {
