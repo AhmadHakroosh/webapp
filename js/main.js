@@ -35,6 +35,7 @@ function tabbing () {
 	$(".tab-item").className = "active-tab-item";
 }
 
+//make ajax call, and request data from server
 function requestData () {
 	var request = new XMLHttpRequest();
 	request.open("GET", "http://ahmadhakroosh.github.io/webapp/data/config.json", true);
@@ -59,6 +60,7 @@ function requestData () {
 	};
 }
 
+//save the form inputs
 function saveData () {
 	var formRows = all(".settings-form .row");
 	var rows = [];
@@ -67,6 +69,7 @@ function saveData () {
 	};
 }
 
+//set links list for selection
 function setLinksList () {
 	var activeTab = $(".active-tab-item .tab-link").hash;
 	$(".links-action-list").innerHTML = $(activeTab + " .links").innerHTML;
@@ -74,6 +77,7 @@ function setLinksList () {
 	setFrameLink();
 }
 
+//set the frame src attribute
 function setFrameLink () {
 	$(".frame-window").src = $(".links-list .link-item a").href;
 	setExpandLink();
