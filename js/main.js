@@ -121,7 +121,7 @@ function setLinksList () {
 
 //set the frame src attribute
 function setFrameLink () {
-	$(".frame-window").src = $(".links-list .link-item a").href;
+	$(".frame-window").src = $(".active-link a").href;
 	setExpandLink();
 }
 
