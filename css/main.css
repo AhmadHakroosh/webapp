@@ -186,20 +186,19 @@ header {
 	display: inline-block;
 }
 
-.links-list:hover .links-action-list {
-	display: block;
-}
-
 .active-link {
 	width: 190px;
 	height: 30px;
 	padding: 0 0 0 10px;
 	background: white;
 	display: inline-block;
+	cursor: pointer;
 }
 
 .active-link a {
 	line-height: 30px;
+	pointer-events: none;
+	cursor: default;
 }
 
 .active-link a:link, .active-link a:visited {
@@ -237,6 +236,15 @@ header {
 	padding: 5px 5px 0 5px;
 }
 
+.link-item:hover {
+	background: lightgrey;
+}
+
+.link-item a {
+	pointer-events: none;
+	cursor: default;
+}
+
 .link-item a:link, .link-item a:visited {
 	text-decoration: none;
 	color: rgb(110, 110, 110);
@@ -250,6 +258,9 @@ header {
 	float: right;
 	padding: 5px 5px 0 5px;
 	text-align: center;
+	width: 25px;
+	height: 30px;
+	position: relative;
 }
 
 .expand-icon {
@@ -265,7 +276,7 @@ header {
 	display: none;
 	position: absolute;
 	width: 930px;
-	margin: 4px 0 0 0;
+	margin: 5px 0 0 0;
 	box-shadow: 5px 5px 5px 0 lightgrey;
 	background: white;
 }
@@ -304,12 +315,8 @@ header {
 	border: none;
 }
 
-#settings-icon:checked~.settings-form {
+#settings-icon:checked ~ .settings-form {
 	display: block;
-}
-
-#settings-icon:checked~#settings {
-	background: white;
 }
 
 .frame-window {

@@ -62,11 +62,43 @@ function requestData () {
 
 //save the form inputs
 function saveData () {
-	var formRows = all(".settings-form .row");
-	var rows = [];
-	for (var i = 0; i < formRows.length; i++) {
-		
-	};
+	var activeTab = $(".active-tab-item .tab-link").hash;
+	var parameters = [], links = [];
+	var parameters = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+
+	for (var i = 0; i < parameters.length; i++) {
+		parameters[i] = parameters[i].replace(/%3A/g,':').replace(/%2F/g,'/').replace(/%26/g,'&').replace(/%25/g,'%');
+		parameters[i] = parameters[i].slice(parameters[i].indexOf('=') + 1);
+	}
+
+	for (i = 0; i < all(".link-name").length; i++) {
+		if (parameters[i] != "" && parameters[2 * i + 1] != "") {
+			links[i] = {
+				label : parameters[2 * i],
+				url : parameters[2 * i + 1]
+			}
+		} else {
+			continue;
+		}
+	}
+
+	var request = new XMLHttpRequest();
+	request.open("GET", "http://ahmadhakroosh.github.io/webapp/data/config.json", true);
+	request.send();
+
+	request.onreadystatechange = function () {
+		if (request.readyState == 4 && request.status == 200) {
+			var data = JSON.parse(request.responseText);
+			
+			for (var i = 0; i < data.tabsList.length; i++) {
+				if (data.tabsList[i].hash == activeTab) {
+					for (var i = 0; i < links.length; i++) {
+						data.tabsList[i].links.push(links[i]);
+					}
+				}
+			}
+		}
+	}
 }
 
 //set links list for selection
@@ -75,6 +107,16 @@ function setLinksList () {
 	$(".links-action-list").innerHTML = $(activeTab + " .links").innerHTML;
 	$(".active-link").innerHTML = $(activeTab + " .links .link-item").innerHTML;
 	setFrameLink();
+	$(".links-list").addEventListener("click" , function (e) {
+		$(".links-action-list").style.display = $(".links-action-list").style.display == "none" ? "block" : "none";
+	});
+	var links = all(".links-action-list .link-item");
+	for (var i = 0; i < links.length; i++) {
+		links[i].addEventListener("click", function (e) {
+			$(".active-link").innerHTML = this.innerHTML;
+			setFrameLink();
+		});
+	}
 }
 
 //set the frame src attribute
@@ -138,7 +180,7 @@ function initialize () {
 	//activate tabbing functionality
 	tabbing();
 	//link event listener to save button
-	$("#form-save").addEventListener("click", saveData());
+	$(".settings-form").addEventListener("submit", saveData());
 }
 
 window.onLoad = initialize();
