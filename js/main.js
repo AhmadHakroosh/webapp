@@ -105,7 +105,7 @@ function saveData () {
 function setLinksList () {
 	var activeTab = $(".active-tab-item .tab-link").hash;
 	$(".links-action-list").innerHTML = $(activeTab + " .links").innerHTML;
-	$(".active-link").innerHTML = $(activeTab + " .links .link-item").innerHTML;
+	$(".active-link").innerHTML = $(".links-action-list .link-item").innerHTML;
 	setFrameLink();
 	$(".links-list").addEventListener("click" , function (e) {
 		$(".links-action-list").style.display = $(".links-action-list").style.display == "none" ? "block" : "none";
