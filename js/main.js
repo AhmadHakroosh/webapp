@@ -41,7 +41,7 @@ function requestData () {
 
 	if (data == null) {
 		var request = new XMLHttpRequest();
-		request.open("GET", "../data/config.json", true);
+		request.open("GET", "./data/config.json", true);
 		request.send();
 
 		request.onreadystatechange = function () {
