@@ -37,27 +37,47 @@ function tabbing () {
 
 //make ajax call, and request data from server
 function requestData () {
-	var request = new XMLHttpRequest();
-	request.open("GET", "http://ahmadhakroosh.github.io/webapp/data/config.json", true);
-	request.send();
+	var data = localStorage.getItem("webappData");
 
-	request.onreadystatechange = function () {
-		if (request.readyState == 4 && request.status == 200) {
-			var data = JSON.parse(request.responseText);
-			
-			//set notification
-			setNotification(data.notification);
+	if (data == null) {
+		var request = new XMLHttpRequest();
+		request.open("GET", "../data/config.json", true);
+		request.send();
 
-			//set nav-sections titles
-			setMenus(data.quickActions);
+		request.onreadystatechange = function () {
+			if (request.readyState == 4 && request.status == 200) {
+				data = JSON.parse(request.responseText);
 
-			//initialize tabs data
-			initializeTabs(data.tabsList);
+				localStorage.setItem("webappData", data);
 
-			//set links list
-			setLinksList();
-		}
-	};
+				//set notification
+				setNotification(data.notification);
+
+				//set nav-sections titles
+				setMenus(data.quickActions);
+
+				//initialize tabs data
+				initializeTabs(data.tabsList);
+
+				//set links list
+				setLinksList();
+			}
+		};
+	} 
+
+	else {
+		//set notification
+		setNotification(data.notification);
+
+		//set nav-sections titles
+		setMenus(data.quickActions);
+
+		//initialize tabs data
+		initializeTabs(data.tabsList);
+
+		//set links list
+		setLinksList();
+	}
 }
 
 //save the form inputs
@@ -82,23 +102,14 @@ function saveData () {
 		}
 	}
 
-	var request = new XMLHttpRequest();
-	request.open("GET", "http://ahmadhakroosh.github.io/webapp/data/config.json", true);
-	request.send();
-
-	request.onreadystatechange = function () {
-		if (request.readyState == 4 && request.status == 200) {
-			var data = JSON.parse(request.responseText);
-			
-			for (var i = 0; i < data.tabsList.length; i++) {
-				if (data.tabsList[i].hash == activeTab) {
-					for (var i = 0; i < links.length; i++) {
-						data.tabsList[i].links.push(links[i]);
-					}
-				}
-			}
+	var data = localStorage.getItem("webappData");
+	for (var i = 0; i < data.tabsList.length; i++) {
+		if (data.tabsList[i].hash == activeTab) {
+			data.tabsList[i].links.push(links);
 		}
-	}
+	};
+
+	localStorage.setItem("webappData", data);
 }
 
 //set links list for selection
@@ -108,7 +119,12 @@ function setLinksList () {
 	$(".active-link").innerHTML = $(".links-action-list .link-item").innerHTML;
 	setFrameLink();
 	$(".links-list").addEventListener("click" , function (e) {
-		$(".links-action-list").style.display = $(".links-action-list").style.display == "none" ? "block" : "none";
+		if ($(".links-action-list").className == "links-action-list hidden") {
+			$(".links-action-list").className = "links-action-list visible";
+			console.log($(".links-action-list").className);
+		} else {
+			$(".links-action-list").className = "links-action-list hidden";
+		}
 	});
 	var links = all(".links-action-list .link-item");
 	for (var i = 0; i < links.length; i++) {

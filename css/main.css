@@ -25,6 +25,14 @@ header {
 	background: black;
 }
 
+.visible {
+	display: block;
+}
+
+.hidden {
+	display: none;
+}
+
 .logo {
 	display: inline-block;
 	float: left;
@@ -217,7 +225,6 @@ header {
 	padding: 5px;
 	list-style: none;
 	text-align: left;
-	display: none;
 	position: absolute;
 	width: 190px;
 	background: white;
