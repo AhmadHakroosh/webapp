@@ -48,7 +48,7 @@ function requestData () {
 			if (request.readyState == 4 && request.status == 200) {
 				data = JSON.parse(request.responseText);
 
-				localStorage.setItem("webappData", data);
+				localStorage.setItem("webappData", JSON.stringify(data));
 
 				//set notification
 				setNotification(data.notification);
@@ -109,7 +109,7 @@ function saveData () {
 		}
 	};
 
-	localStorage.setItem("webappData", data);
+	localStorage.setItem("webappData", JSON.stringify(data));
 }
 
 //set links list for selection
