@@ -41,7 +41,7 @@ function requestData () {
 
 	if (data == null) {
 		var request = new XMLHttpRequest();
-		request.open("GET", "./data/config.json", true);
+		request.open("GET", "http://ahmadhakroosh.github.io/webapp/data/config.json", true);
 		request.send();
 
 		request.onreadystatechange = function () {
@@ -59,6 +59,9 @@ function requestData () {
 				//initialize tabs data
 				initializeTabs(data.tabsList);
 
+				//tabbing functionality
+				tabbing();
+
 				//set links list
 				setLinksList();
 			}
@@ -66,6 +69,8 @@ function requestData () {
 	} 
 
 	else {
+		data = JSON.parse(data);
+
 		//set notification
 		setNotification(data.notification);
 
@@ -74,6 +79,9 @@ function requestData () {
 
 		//initialize tabs data
 		initializeTabs(data.tabsList);
+
+		//tabbing functionality
+		tabbing();
 
 		//set links list
 		setLinksList();
@@ -103,12 +111,16 @@ function saveData () {
 	}
 
 	var data = localStorage.getItem("webappData");
+	data = JSON.parse(data);
 	for (var i = 0; i < data.tabsList.length; i++) {
 		if (data.tabsList[i].hash == activeTab) {
-			data.tabsList[i].links.push(links);
+			for (var j = 0; j < links.length; j++) {
+				data.tabsList[i].links.push(links[j]);
+				$(activeTab + " .links").innerHTML += "<li class=\"link-item\"><a href=\"" + links[j].url + "\">" + links[j].label + "</a></li>";
+			};
 		}
-	};
-
+	}
+	setLinksList();
 	localStorage.setItem("webappData", JSON.stringify(data));
 }
 
@@ -117,15 +129,6 @@ function setLinksList () {
 	var activeTab = $(".active-tab-item .tab-link").hash;
 	$(".links-action-list").innerHTML = $(activeTab + " .links").innerHTML;
 	$(".active-link").innerHTML = $(".links-action-list .link-item").innerHTML;
-	setFrameLink();
-	$(".links-list").addEventListener("click" , function (e) {
-		if ($(".links-action-list").className == "links-action-list hidden") {
-			$(".links-action-list").className = "links-action-list visible";
-			console.log($(".links-action-list").className);
-		} else {
-			$(".links-action-list").className = "links-action-list hidden";
-		}
-	});
 	var links = all(".links-action-list .link-item");
 	for (var i = 0; i < links.length; i++) {
 		links[i].addEventListener("click", function (e) {
@@ -193,10 +196,13 @@ function initializeTabs (tabsList) {
 function initialize () {
 	//get the data from the server
 	requestData();
-	//activate tabbing functionality
-	tabbing();
 	//link event listener to save button
 	$(".settings-form").addEventListener("submit", saveData());
+
+	$(".links-list").addEventListener("click" , function (e) {
+		$(".links-action-list").classList.toggle('visible');
+		$(".links-action-list").classList.toggle('hidden');
+	});
 }
 
 window.onLoad = initialize();
