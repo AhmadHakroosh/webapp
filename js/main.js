@@ -21,7 +21,7 @@ function tabbing () {
 			setFrameLink();
 
 			//hide settings icon and links lists for My Folders tab
-			if (this.hash == "#my-folders") {
+			if (this.hash == "#my-folders" || this.hash == "#my-team-folders") {
 				$("#settings").style.display = "none";
 				$(".links-list").style.display = "none";
 			//unhide for other tabs
@@ -95,7 +95,7 @@ function saveData () {
 	var parameters = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
 
 	for (var i = 0; i < parameters.length; i++) {
-		parameters[i] = parameters[i].replace(/%3A/g,':').replace(/%2F/g,'/').replace(/%26/g,'&').replace(/%25/g,'%');
+		parameters[i] = parameters[i].replace(/%3A/g,':').replace(/%2F/g,'/').replace(/%26/g,'&').replace(/%25/g,'%').replace('+',' ');
 		parameters[i] = parameters[i].slice(parameters[i].indexOf('=') + 1);
 	}
 
@@ -136,6 +136,8 @@ function setLinksList () {
 			setFrameLink();
 		});
 	}
+
+	setFrameLink();
 }
 
 //set the frame src attribute
