@@ -120,6 +120,7 @@ function saveData () {
 			};
 		}
 	}
+	window.location.reload(false);
 	setLinksList();
 	localStorage.setItem("webappData", JSON.stringify(data));
 }
