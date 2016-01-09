@@ -41,7 +41,7 @@ function requestData () {
 
 	if (data == null) {
 		var request = new XMLHttpRequest();
-		request.open("GET", "http://ahmadhakroosh.github.io/webapp/data/config.json", true);
+		request.open("GET", "./data/config.json", true);
 		request.send();
 
 		request.onreadystatechange = function () {
@@ -199,7 +199,9 @@ function initialize () {
 	//get the data from the server
 	requestData();
 	//link event listener to save button
-	$(".settings-form").addEventListener("submit", saveData());
+	$(".settings-form").addEventListener("submit", function (e) {
+		saveData()
+	});
 
 	$(".links-list").addEventListener("click" , function (e) {
 		$(".links-action-list").classList.toggle('visible');
