@@ -92,7 +92,7 @@ function requestData () {
 function saveData () {
 	var activeTab = $(".active-tab-item .tab-link").hash;
 	var parameters = [], links = [];
-	var parameters = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+	var parameters = window.location.search.split('?')[1].split("&");
 
 	for (var i = 0; i < parameters.length; i++) {
 		parameters[i] = parameters[i].replace(/%3A/g,':').replace(/%2F/g,'/').replace(/%26/g,'&').replace(/%25/g,'%').replace('+',' ');
@@ -120,9 +120,9 @@ function saveData () {
 			};
 		}
 	}
-	window.location.reload(false);
 	setLinksList();
 	localStorage.setItem("webappData", JSON.stringify(data));
+	window.location = "http://ahmadhakroosh.github.io/webapp";
 }
 
 //set links list for selection
