@@ -92,23 +92,22 @@ function requestData () {
 function saveData () {
 	var activeTab = $(".active-tab-item .tab-link").hash;
 	var parameters = [], links = [];
-	var parameters = window.location.search.split('?')[1].split("&");
+	var rows = all(".settings-form .row");
+	for (var i = 0; i < rows.length; i++) {
+		parameters = [
+			rows[i].children[1].value,
+			rows[i].children[3].value
+		];
 
-	for (var i = 0; i < parameters.length; i++) {
-		parameters[i] = parameters[i].replace(/%3A/g,':').replace(/%2F/g,'/').replace(/%26/g,'&').replace(/%25/g,'%').replace('+',' ');
-		parameters[i] = parameters[i].slice(parameters[i].indexOf('=') + 1);
-	}
-
-	for (i = 0; i < all(".link-name").length; i++) {
-		if (parameters[i] != "" && parameters[2 * i + 1] != "") {
+		if (parameters[0] != "" && parameters[1] != "") {
 			links[i] = {
-				label : parameters[2 * i],
-				url : parameters[2 * i + 1]
+				label : parameters[0],
+				url : parameters[1]
 			}
 		} else {
 			continue;
-		}
-	}
+		};
+	};
 
 	var data = localStorage.getItem("webappData");
 	data = JSON.parse(data);
@@ -120,9 +119,8 @@ function saveData () {
 			};
 		}
 	}
-	setLinksList();
 	localStorage.setItem("webappData", JSON.stringify(data));
-	window.location = "http://ahmadhakroosh.github.io/webapp";
+	setLinksList();
 }
 
 //set links list for selection
