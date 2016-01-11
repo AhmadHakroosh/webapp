@@ -271,11 +271,15 @@ header {
 
 .expand-icon {
 	float: right;
+	text-align: center;
 	margin: 5px 5px 8px 0;
-	background: url(../img/icons/expand.png) no-repeat center center;
 	display: block;
 	width: 20px;
 	height: 20px;
+}
+
+.expand-icon img {
+	vertical-align: middle;
 }
 
 .settings-form {

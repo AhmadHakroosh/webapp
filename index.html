@@ -16,7 +16,7 @@
 			<a href="#" class="logo"><img src="img/logo-netcraft.svg" alt="netcraft"></a>
 
 			<form class="search-box">
-				<input type="search" name="q" placeholder="search">
+				<input id="search" type="search" name="q" placeholder="search">
 			</form>
 		</div>
 	</header>
@@ -87,30 +87,30 @@
 				</div>
 
 				<label id="settings" for="settings-icon">
-					<img src="img/icons/settings.png">
+					<img src="img/icons/settings.png" alt="settings icon">
 				</label>
 				<input type="checkbox" id="settings-icon">
 
 				<form class="settings-form" method="GET" action="index.html">
 
 					<div class="row">
-						<label for="name1">Name:</label><input id="name1" name="name1" class="link-name" type="text">
-						<label for="link1">URL:</label><input id="link1" name="link1" class="link-url" type="text">
+						<label for="name1">Name:</label><input id="name1" class="link-name" type="text">
+						<label for="link1">URL:</label><input id="link1" class="link-url" type="text">
 					</div>
 					<div class="row">
-						<label for="name2">Name:</label><input id="name2" name="name2" class="link-name" type="text">
-						<label for="link2">URL:</label><input id="link2" name="link2" class="link-url" type="text">
+						<label for="name2">Name:</label><input id="name2" class="link-name" type="text">
+						<label for="link2">URL:</label><input id="link2" class="link-url" type="text">
 					</div>
 					<div class="row">
-						<label for="name3">Name:</label><input id="name3" name="name3" class="link-name" type="text">
-						<label for="link3">URL:</label><input id="link3" name="link3" class="link-url" type="text">
+						<label for="name3">Name:</label><input id="name3" class="link-name" type="text">
+						<label for="link3">URL:</label><input id="link3" class="link-url" type="text">
 					</div>
 
 					<input id="form-save" value="Save" type="submit"/>
 					<input id="form-cancel" value="Cancel" type="cancel">
 				</form>
 
-				<a href="" class="expand-icon" target="_blank"></a>
+				<a href="" class="expand-icon" target="_blank"><img src="img/icons/expand.png" alt="open this link in a new window"></a>
 			</div>
 			<iframe src="" class="frame-window"></iframe>
 		</section>
