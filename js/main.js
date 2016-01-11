@@ -198,7 +198,7 @@ function initialize () {
 	//get the data from the server
 	requestData();
 	//link event listener to save button
-	$(".settings-form").addEventListener("submit", function (e) {
+	$("#form-save").addEventListener("click", function (e) {
 		saveData()
 	});
 
