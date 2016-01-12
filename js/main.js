@@ -127,6 +127,9 @@ function setLinksList () {
 	}
 
 	setFrameLink();
+	if (activeTab == "#my-folders" || activeTab == "#my-team-folders") {
+		$(".links-action-list").innerHTML = "";
+	};
 }
 
 //set the active tab
