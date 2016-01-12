@@ -11,28 +11,15 @@ function all (selector) {
 function tabbing () {
 	//add an event listener for each tab
 	var tabs = all(".tab-link");
+	setActiveTab(window.location.hash || $(".tab-link").hash);
 
 	for (var i = 0; i < tabs.length; i++) {
 		tabs[i].addEventListener("click", function (e) {
-			$(".active-tab-item").className = "tab-item";
-			this.parentNode.className = "active-tab-item";
-
+			setActiveTab(this.hash);
 			setLinksList();
 			setFrameLink();
-
-			//hide settings icon and links lists for My Folders tab
-			if (this.hash == "#my-folders" || this.hash == "#my-team-folders") {
-				$("#settings").style.display = "none";
-				$(".links-list").style.display = "none";
-			//unhide for other tabs
-			} else {
-				$("#settings").style.display = "block";
-				$(".links-list").style.display = "inline-block";
-			}
 		});
 	}
-
-	$(".tab-item").className = "active-tab-item";
 }
 
 //make ajax call, and request data from server
@@ -92,6 +79,7 @@ function requestData () {
 function saveData () {
 	var activeTab = $(".active-tab-item .tab-link").hash;
 	var parameters = [], links = [];
+	var urlRegex = new RegExp("https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,}", i);
 	var rows = all(".settings-form .row");
 	for (var i = 0; i < rows.length; i++) {
 		parameters = [
@@ -100,9 +88,11 @@ function saveData () {
 		];
 
 		if (parameters[0] != "" && parameters[1] != "") {
-			links[i] = {
-				label : parameters[0],
-				url : parameters[1]
+			if (urlRegex.test(parameters[1])) {
+				links[i] = {
+					label : parameters[0],
+					url : parameters[1]
+				}
 			}
 		} else {
 			continue;
@@ -137,6 +127,32 @@ function setLinksList () {
 	}
 
 	setFrameLink();
+}
+
+//set the active tab
+function setActiveTab (activeTab) {
+	if (activeTab == "") {
+		$(".tab-item").className = "active-tab-item";
+	} else {
+		var tabs = all(".tab-link");
+		for (var i = 0; i < tabs.length; i++) {
+			if (tabs[i].hash == activeTab) {
+				tabs[i].parentNode.className = "active-tab-item";
+			} else {
+				tabs[i].parentNode.className = "tab-item";
+			}
+		}
+	}
+
+	//hide settings icon and links lists for My Folders tab
+	if (activeTab == "#my-folders" || activeTab == "#my-team-folders") {
+		$("#settings").style.display = "none";
+		$(".links-list").style.display = "none";
+	//unhide for other tabs
+	} else {
+		$("#settings").style.display = "block";
+		$(".links-list").style.display = "inline-block";
+	}
 }
 
 //set the frame src attribute
@@ -199,7 +215,8 @@ function initialize () {
 	requestData();
 	//link event listener to save button
 	$("#form-save").addEventListener("click", function (e) {
-		saveData()
+		saveData();
+		$(".settings-form").action = $(".active-tab-item .tab-link").hash;
 	});
 
 	$(".links-list").addEventListener("click" , function (e) {
