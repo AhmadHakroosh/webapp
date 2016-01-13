@@ -226,6 +226,16 @@ function initialize () {
 		$(".links-action-list").classList.toggle('visible');
 		$(".links-action-list").classList.toggle('hidden');
 	});
+
+	$("#settings-icon").addEventListener("click", function (e) {
+		if (this.checked == true) {
+			$("#settings").style.background = "white";
+			$("#settings").style.boxShadow = "5px 5px 5px 0 lightgrey";
+		} else {
+			$("#settings").style.background = "none";
+			$("#settings").style.boxShadow = "none";
+		};
+	});
 }
 
 window.onLoad = initialize();
