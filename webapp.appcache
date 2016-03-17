@@ -7,9 +7,9 @@ CACHE:
 css/body-background.jpg
 css/logo-netcraft.svg
 css/netcraft-logo.png
-css/actions-report-new.png
-css/actions-report-top.png
-css/actions-help.png
-css/arrow.png
-css/expand.png
-css/settings.png
+css/icons/actions-report-new.png
+css/icons/actions-report-top.png
+css/icons/actions-help.png
+css/icons/arrow.png
+css/icons/expand.png
+css/icons/settings.png
