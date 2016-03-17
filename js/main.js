@@ -1,1 +1,241 @@
-function $(t){return document.querySelector(t)}function all(t){return document.querySelectorAll(t)}function tabbing(){var t=all(".tab-link");setActiveTab(window.location.hash||$(".tab-link").hash);for(var i=0;i<t.length;i++)t[i].addEventListener("click",function(t){setActiveTab(this.hash),setLinksList(),setFrameLink()})}function requestData(){var t=localStorage.getItem("webappData");if(null==t){var i=new XMLHttpRequest;i.open("GET","./data/config.json",!0),i.send(),i.onreadystatechange=function(){4==i.readyState&&200==i.status&&(t=JSON.parse(i.responseText),localStorage.setItem("webappData",JSON.stringify(t)),setNotification(t.notification),setMenus(t.quickActions),initializeTabs(t.tabsList),tabbing(),setLinksList())}}else t=JSON.parse(t),setNotification(t.notification),setMenus(t.quickActions),initializeTabs(t.tabsList),tabbing(),setLinksList()}function saveData(){for(var t=$(".active-tab-item .tab-link").hash,i=[],n=[],e=new RegExp("https?://(?:www.|(?!www))[^s.]+.[^s]{2,}|www.[^s]+.[^s]{2,}",s),a=all(".settings-form .row"),s=0;s<a.length;s++)i=[a[s].children[1].value,a[s].children[3].value],""!=i[0]&&""!=i[1]&&e.test(i[1])&&(n[s]={label:i[0],url:i[1]});var l=localStorage.getItem("webappData");l=JSON.parse(l);for(var s=0;s<l.tabsList.length;s++)if(l.tabsList[s].hash==t)for(var o=0;o<n.length;o++)l.tabsList[s].links.push(n[o]),$(t+" .links").innerHTML+='<li class="link-item"><a href="'+n[o].url+'">'+n[o].label+"</a></li>";localStorage.setItem("webappData",JSON.stringify(l)),setLinksList()}function setLinksList(){var t=$(".active-tab-item .tab-link").hash;$(".links-action-list").innerHTML=$(t+" .links").innerHTML,$(".active-link").innerHTML=$(".links-action-list .link-item").innerHTML;for(var i=all(".links-action-list .link-item"),n=0;n<i.length;n++)i[n].addEventListener("click",function(t){$(".active-link").innerHTML=this.innerHTML,setFrameLink()});setFrameLink(),("#my-folders"==t||"#my-team-folders"==t)&&($(".links-action-list").innerHTML="")}function setActiveTab(t){if(""==t)$(".tab-item").className="active-tab-item";else for(var i=all(".tab-link"),n=0;n<i.length;n++)i[n].hash==t?i[n].parentNode.className="active-tab-item":i[n].parentNode.className="tab-item";"#my-folders"==t||"#my-team-folders"==t?($("#settings").style.display="none",$(".links-list").style.display="none"):($("#settings").style.display="block",$(".links-list").style.display="inline-block")}function setFrameLink(){$(".frame-window").src=$(".active-link a").href,setExpandLink()}function setExpandLink(){$(".expand-icon").href=$(".frame-window").src}function setNotification(t){$(".notifications").innerHTML=t}function setMenus(t){for(var i=all(".nav-section"),n=0;n<i.length;n++)i[n].innerHTML="<p>"+t[n].label+"</p>"+i[n].innerHTML,i[n].style.background="black url(./img/icons/"+t[n].icon+".png) center top 60px no-repeat";for(var e=all(".menu-caption"),n=0;n<e.length;n++)e[n].innerHTML="<p>"+t[n].actionsLabel+"</p>";for(var a=all(".action-list"),n=0;n<a.length;n++){actions=t[n].actions;for(var s=0;s<actions.length;s++)a[n].innerHTML+='<li class="action-list-item"><a href="'+actions[s].url+'">'+actions[s].label+"</a></li>"}}function initializeTabs(t){for(var i=all(".tab-link"),n=0;n<i.length;n++)i[n].innerHTML='<i class="'+t[n].icon+'"></i> '+t[n].label;for(var e,n=0;n<t.length;n++){e=t[n].links;for(var a=0;a<e.length;a++)$(t[n].hash+" .links").innerHTML+='<li class="link-item"><a href="'+e[a].url+'">'+e[a].label+"</a></li>"}}function initialize(){requestData(),$("#form-save").addEventListener("click",function(t){saveData(),$(".settings-form").action=$(".active-tab-item .tab-link").hash}),$(".links-list").addEventListener("click",function(t){$(".links-action-list").classList.toggle("visible"),$(".links-action-list").classList.toggle("hidden")}),$("#settings-icon").addEventListener("click",function(t){1==this.checked?($("#settings").style.background="white",$("#settings").style.boxShadow="5px 5px 5px 0 lightgrey"):($("#settings").style.background="none",$("#settings").style.boxShadow="none")})}window.onLoad=initialize();
+//General function to select DOM elements
+function $ (selector) {
+	return document.querySelector(selector);
+}
+
+function all (selector) {
+	return document.querySelectorAll(selector);
+}
+
+//activate selected tab, deactivate others
+function tabbing () {
+	//add an event listener for each tab
+	var tabs = all(".tab-link");
+	setActiveTab(window.location.hash || $(".tab-link").hash);
+
+	for (var i = 0; i < tabs.length; i++) {
+		tabs[i].addEventListener("click", function (e) {
+			setActiveTab(this.hash);
+			setLinksList();
+			setFrameLink();
+		});
+	}
+}
+
+//make ajax call, and request data from server
+function requestData () {
+	var data = localStorage.getItem("webappData");
+
+	if (data == null) {
+		var request = new XMLHttpRequest();
+		request.open("GET", "./data/config.json", true);
+		request.send();
+
+		request.onreadystatechange = function () {
+			if (request.readyState == 4 && request.status == 200) {
+				data = JSON.parse(request.responseText);
+
+				localStorage.setItem("webappData", JSON.stringify(data));
+
+				//set notification
+				setNotification(data.notification);
+
+				//set nav-sections titles
+				setMenus(data.quickActions);
+
+				//initialize tabs data
+				initializeTabs(data.tabsList);
+
+				//tabbing functionality
+				tabbing();
+
+				//set links list
+				setLinksList();
+			}
+		};
+	} 
+
+	else {
+		data = JSON.parse(data);
+
+		//set notification
+		setNotification(data.notification);
+
+		//set nav-sections titles
+		setMenus(data.quickActions);
+
+		//initialize tabs data
+		initializeTabs(data.tabsList);
+
+		//tabbing functionality
+		tabbing();
+
+		//set links list
+		setLinksList();
+	}
+}
+
+//save the form inputs
+function saveData () {
+	var activeTab = $(".active-tab-item .tab-link").hash;
+	var parameters = [], links = [];
+	var urlRegex = new RegExp("https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,}", i);
+	var rows = all(".settings-form .row");
+	for (var i = 0; i < rows.length; i++) {
+		parameters = [
+			rows[i].children[1].value,
+			rows[i].children[3].value
+		];
+
+		if (parameters[0] != "" && parameters[1] != "") {
+			if (urlRegex.test(parameters[1])) {
+				links[i] = {
+					label : parameters[0],
+					url : parameters[1]
+				}
+			}
+		} else {
+			continue;
+		};
+	};
+
+	var data = localStorage.getItem("webappData");
+	data = JSON.parse(data);
+	for (var i = 0; i < data.tabsList.length; i++) {
+		if (data.tabsList[i].hash == activeTab) {
+			for (var j = 0; j < links.length; j++) {
+				data.tabsList[i].links.push(links[j]);
+				$(activeTab + " .links").innerHTML += "<li class=\"link-item\"><a href=\"" + links[j].url + "\">" + links[j].label + "</a></li>";
+			};
+		}
+	}
+	localStorage.setItem("webappData", JSON.stringify(data));
+	setLinksList();
+}
+
+//set links list for selection
+function setLinksList () {
+	var activeTab = $(".active-tab-item .tab-link").hash;
+	$(".links-action-list").innerHTML = $(activeTab + " .links").innerHTML;
+	$(".active-link").innerHTML = $(".links-action-list .link-item").innerHTML;
+	var links = all(".links-action-list .link-item");
+	for (var i = 0; i < links.length; i++) {
+		links[i].addEventListener("click", function (e) {
+			$(".active-link").innerHTML = this.innerHTML;
+			setFrameLink();
+		});
+	}
+
+	setFrameLink();
+	if (activeTab == "#my-folders" || activeTab == "#my-team-folders") {
+		$(".links-action-list").innerHTML = "";
+	};
+}
+
+//set the active tab
+function setActiveTab (activeTab) {
+	if (activeTab == "") {
+		$(".tab-item").className = "active-tab-item";
+	} else {
+		var tabs = all(".tab-link");
+		for (var i = 0; i < tabs.length; i++) {
+			if (tabs[i].hash == activeTab) {
+				tabs[i].parentNode.className = "active-tab-item";
+			} else {
+				tabs[i].parentNode.className = "tab-item";
+			}
+		}
+	}
+
+	//hide settings icon and links lists for My Folders tab
+	if (activeTab == "#my-folders" || activeTab == "#my-team-folders") {
+		$("#settings").style.display = "none";
+		$(".links-list").style.display = "none";
+	//unhide for other tabs
+	} else {
+		$("#settings").style.display = "block";
+		$(".links-list").style.display = "inline-block";
+	}
+}
+
+//set the frame src attribute
+function setFrameLink () {
+	$(".frame-window").src = $(".active-link a").href;
+	setExpandLink();
+}
+
+function setExpandLink () {
+	$(".expand-icon").href = $(".frame-window").src;
+}
+
+function setNotification (notification) {
+	$(".notifications").innerHTML = notification;
+}
+
+function setMenus (quickActions) {
+	//set menus backgrounds and headers
+	var navSections = all(".nav-section");
+	for (var i = 0; i < navSections.length; i++) {
+		navSections[i].innerHTML = "<p>" + quickActions[i].label + "</p>" + navSections[i].innerHTML;
+		navSections[i].style.background = "black url(./img/icons/" + quickActions[i].icon + ".png) center top 60px no-repeat";
+	}
+
+	//set menu captions
+	var menuCaptions = all(".menu-caption");
+	for (var i = 0; i < menuCaptions.length; i++) {
+		menuCaptions[i].innerHTML = "<p>" + quickActions[i].actionsLabel + "</p>";
+	}
+
+	//set links for quick actions menus
+	var actionLists = all(".action-list");
+	for (var i = 0; i < actionLists.length; i++) {
+		actions = quickActions[i].actions;
+		for (var j = 0; j < actions.length; j++) {
+			actionLists[i].innerHTML += "<li class=\"action-list-item\"><a href=\"" + actions[j].url + "\">" + actions[j].label + "</a></li>"
+		}
+	}
+}
+
+function initializeTabs (tabsList) {
+	var tabs = all(".tab-link");
+	for (var i = 0; i < tabs.length; i++) {
+		tabs[i].innerHTML = "<i class=\"" + tabsList[i].icon + "\"></i> " + tabsList[i].label;
+	}
+
+	//set tabs links
+	var links;
+	for (var i = 0; i < tabsList.length; i++) {
+		links = tabsList[i].links;
+		for (var j = 0; j < links.length; j++) {
+			$(tabsList[i].hash + " .links").innerHTML += "<li class=\"link-item\"><a href=\"" + links[j].url + "\">" + links[j].label + "</a></li>";
+		}
+	}
+}
+
+//initialize the application view
+function initialize () {
+	//get the data from the server
+	requestData();
+	//link event listener to save button
+	$("#form-save").addEventListener("click", function (e) {
+		saveData();
+		$(".settings-form").action = $(".active-tab-item .tab-link").hash;
+	});
+
+	$(".links-list").addEventListener("click" , function (e) {
+		$(".links-action-list").classList.toggle('visible');
+		$(".links-action-list").classList.toggle('hidden');
+	});
+
+	$("#settings-icon").addEventListener("click", function (e) {
+		if (this.checked == true) {
+			$("#settings").style.background = "white";
+			$("#settings").style.boxShadow = "5px 5px 5px 0 lightgrey";
+		} else {
+			$("#settings").style.background = "none";
+			$("#settings").style.boxShadow = "none";
+		};
+	});
+}
+
+window.onLoad = initialize();
