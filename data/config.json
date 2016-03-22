@@ -61,14 +61,7 @@
 			"hash" : "#quick-reports",
 			"links" : 
 			[
-				{
-					"label" : "Ahmad Hakroosh",
-					"url" : "http://www.ahmad-h.com/"
-				},
-				{
-					"label" : "Ynet",
-					"url" : "http://www.ynet.co.il/"
-				}
+				
 			]
 		},
 
@@ -92,13 +85,9 @@
 			"links" : 
 			[
 				{
-					"label" : "Panet",
-					"url" : "http://www.panet.co.il/"
-				},
-				{
 					"label" : "Paul Irish",
 					"url" : "http://www.paulirish.com/"
-				}
+				}	
 			]
 		},
 
@@ -108,14 +97,7 @@
 			"hash" : "#public-folders",
 			"links" : 
 			[
-				{
-					"label" : "Al Arab",
-					"url" : "http://www.alarab.com/"
-				},
-				{
-					"label" : "Paul Irish",
-					"url" : "http://www.paulirish.com/"
-				}
+				
 			]
 		}
 	]
