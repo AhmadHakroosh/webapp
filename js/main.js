@@ -226,6 +226,8 @@ function initialize () {
 		$(".links-action-list").classList.toggle('visible');
 		$(".links-action-list").classList.toggle('hidden');
 	});
+	
+	$("#settings-icon").checked = true;
 
 	$("#settings-icon").addEventListener("click", function (e) {
 		if (this.checked == true) {
