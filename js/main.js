@@ -228,6 +228,8 @@ function initialize () {
 	});
 	
 	$("#settings-icon").checked = true;
+	$("#settings").style.background = "white";
+	$("#settings").style.boxShadow = "5px 5px 5px 0 lightgrey";
 
 	$("#settings-icon").addEventListener("click", function (e) {
 		if (this.checked == true) {
